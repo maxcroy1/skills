@@ -27,3 +27,7 @@ This skill standardizes a LinkedIn job-search scraping workflow that exports all
 
 - User should keep the same browser tab/session active while the scrape runs.
 - Skill should continue pagination until no `Next` page exists.
+
+## Development process
+
+- Blog post: https://www.maxcroy.com/writing/job-hunt-part-1-network/
