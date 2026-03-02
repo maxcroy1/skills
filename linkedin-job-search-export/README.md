@@ -23,10 +23,28 @@ This skill standardizes a LinkedIn job-search scraping workflow that exports all
   - `High level requirements`
   - `Results page`
 
+## Pagination strategy
+
+- Do not rely only on the LinkedIn `Next` button state.
+- Use deterministic pagination by `start` query param in steps of 25 (`start=0,25,50,...`).
+- Stop when `start >= totalResults` (if detectable), or when a new page yields no new `/jobs/view/` links.
+
+## Extraction rules
+
+- Scrape from the jobs search results list container only.
+- Accept only links that match `/jobs/view/`.
+- Exclude non-job modules (recommended collections, alerts, side panel links, and other non-search cards).
+- Normalize text by trimming whitespace, collapsing duplicated title text, and removing UI suffixes such as `with verification`.
+
 ## Usage expectations
 
 - User should keep the same browser tab/session active while the scrape runs.
-- Skill should continue pagination until no `Next` page exists.
+- Skill should report:
+  - final CSV path
+  - total results detected
+  - page offsets attempted
+  - unique listing count exported
+  - shortfall reason if exported count is lower than expected
 
 ## Development process
 
